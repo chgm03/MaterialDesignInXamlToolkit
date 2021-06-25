@@ -41,7 +41,7 @@
      
             <smtx:XamlDisplay UniqueKey="comboboxes_1" Margin="0">
 
-                <ComboBox materialDesign:HintAssist.Hint="OS">
+                <ComboBox materialDesign:HintAssist.Hint="OS" Padding="25">
                     <ComboBoxItem Content="Android"/>
                     <ComboBoxItem Content="iOS"/>
                     <ComboBoxItem Content="Linux"/>

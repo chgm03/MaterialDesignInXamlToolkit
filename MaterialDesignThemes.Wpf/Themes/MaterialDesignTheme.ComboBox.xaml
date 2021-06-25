@@ -334,31 +334,36 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Grid>
-                        <Border x:Name="ToggleTemplateRoot"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}">
+                    <Border x:Name="ToggleTemplateRoot"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter/>
                             <Border x:Name="splitBorder"
-                                    Margin="0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    BorderBrush="Transparent"
-                                    BorderThickness="0">
+                                Margin="0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                BorderBrush="Transparent"
+                                BorderThickness="0">
                                 <Path x:Name="arrow"
-                                      Width="{x:Static wpf:Constants.ComboBoxArrowSize}"
-                                      Height="{x:Static wpf:Constants.ComboBoxArrowSize}"
-                                      Margin="0"
-                                      Stretch="Uniform"
-                                      HorizontalAlignment="Right"
-                                      VerticalAlignment="Center"
-                                      Data="M7,10L12,15L17,10H7Z"
-                                      Fill="{TemplateBinding BorderBrush}"
-                                      RenderTransformOrigin="0.5,0.5" />
+                                  Width="{x:Static wpf:Constants.ComboBoxArrowSize}"
+                                  Height="{x:Static wpf:Constants.ComboBoxArrowSize}"
+                                  Margin="0"
+                                  Stretch="Uniform"
+                                  HorizontalAlignment="Right"
+                                  VerticalAlignment="Center"
+                                  Data="M7,10L12,15L17,10H7Z"
+                                  Fill="{TemplateBinding BorderBrush}"
+                                  RenderTransformOrigin="0.5,0.5" />
                             </Border>
-                        </Border>
-                    </Grid>
+                        </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -408,108 +413,107 @@
     </Style>
 
     <ControlTemplate x:Key="MaterialDesignFloatingHintComboBoxTemplate" TargetType="{x:Type ComboBox}">
-        <AdornerDecorator>
-            <Grid>
+        <Grid>
                 <ToggleButton
                     x:Name="toggleButton"
                     IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                     Style="{StaticResource MaterialDesignComboBoxToggleButton}"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     Background="{TemplateBinding Background}"
-                    Padding="{TemplateBinding Padding}" />
-                <Border
-                    x:Name="templateRoot"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    SnapsToDevicePixels="True"
-                    wpf:BottomDashedLineAdorner.IsAttached="False">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
-                        </Grid.ColumnDefinitions>
+                    Padding="{TemplateBinding Padding}">
+                    <AdornerDecorator>
                         <Border
-                            Grid.Column="0"
-                            Grid.Row="0"
-                            Padding="{TemplateBinding Padding}">
-                            <Grid
-                                x:Name="InnerRoot"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                UseLayoutRounding="{TemplateBinding UseLayoutRounding}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            x:Name="templateRoot"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True"
+                            wpf:BottomDashedLineAdorner.IsAttached="False">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    x:Name="PrefixTextBlock"
-                                    Grid.Column="0"
-                                    FontSize="{TemplateBinding FontSize}"
-                                    Opacity="{TemplateBinding wpf:HintAssist.HintOpacity}"
-                                    Text="{TemplateBinding wpf:TextFieldAssist.PrefixText}"
-                                    IsHitTestVisible="False" />
-
-                                <ContentPresenter
-                                    x:Name="contentPresenter"
-                                    Grid.Column="1"
-                                    Content="{TemplateBinding SelectionBoxItem}"
-                                    ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
-                                    ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                    ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                    IsHitTestVisible="False"
-                                    Margin="{TemplateBinding wpf:TextFieldAssist.TextBoxViewMargin}" />
-                                <TextBox
-                                    x:Name="PART_EditableTextBox"
-                                    Grid.Column="1"
-                                    MinWidth="10"
-                                    IsReadOnly="{TemplateBinding IsReadOnly}"
-                                    HorizontalAlignment="Stretch"
-                                    HorizontalContentAlignment="Stretch"
-                                    Style="{StaticResource MaterialDesignComboBoxEditableTextBox}"
-                                    CaretBrush="{TemplateBinding BorderBrush}"
-                                    Visibility="Collapsed" />
-
-                                <wpf:SmartHint
-                                    x:Name="Hint"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    HintProxy="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static converters:HintProxyFabricConverter.Instance}}"
-                                    FontSize="{TemplateBinding FontSize}"
-                                    FontFamily="{TemplateBinding wpf:HintAssist.FontFamily}"
+                                <Border Grid.Column="0" Grid.Row="0" Padding="{TemplateBinding Padding}">
+                                    <Grid
+                                    x:Name="InnerRoot"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                     UseLayoutRounding="{TemplateBinding UseLayoutRounding}"
-                                    UseFloating="{TemplateBinding wpf:HintAssist.IsFloating}"
-                                    FloatingScale="{TemplateBinding wpf:HintAssist.FloatingScale}"
-                                    FloatingOffset="{TemplateBinding wpf:HintAssist.FloatingOffset}"
-                                    HintOpacity="{TemplateBinding wpf:HintAssist.HintOpacity}"
-                                    Margin="{TemplateBinding wpf:TextFieldAssist.TextBoxViewMargin}">
-                                    <wpf:SmartHint.Hint>
-                                        <Border
-                                            x:Name="HintBackgroundBorder"
-                                            Background="{TemplateBinding wpf:HintAssist.Background}"
-                                            CornerRadius="2">
-                                            <ContentPresenter
-                                                x:Name="HintWrapper"
-                                                Content="{TemplateBinding wpf:HintAssist.Hint}" />
-                                        </Border>
-                                    </wpf:SmartHint.Hint>
-                                </wpf:SmartHint>
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                        x:Name="PrefixTextBlock"
+                                        Grid.Column="0"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        Opacity="{TemplateBinding wpf:HintAssist.HintOpacity}"
+                                        Text="{TemplateBinding wpf:TextFieldAssist.PrefixText}"
+                                        IsHitTestVisible="False" />
 
-                                <TextBlock
-                                    x:Name="SuffixTextBlock"
-                                    Grid.Column="3"
-                                    FontSize="{TemplateBinding FontSize}"
-                                    Opacity="{TemplateBinding wpf:HintAssist.HintOpacity}"
-                                    Text="{TemplateBinding wpf:TextFieldAssist.SuffixText}"
-                                    IsHitTestVisible="False"
-                                    Margin="{Binding ActualWidth, ElementName=PART_ClearButton, Converter={StaticResource DoubleToThicknessConverter}, ConverterParameter={x:Static Dock.Right}}" />
+                                        <ContentPresenter
+                                        x:Name="contentPresenter"
+                                        Grid.Column="1"
+                                        Content="{TemplateBinding SelectionBoxItem}"
+                                        ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                        ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                        ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                        IsHitTestVisible="False"
+                                        Margin="{TemplateBinding wpf:TextFieldAssist.TextBoxViewMargin}" />
+                                        <TextBox
+                                        x:Name="PART_EditableTextBox"
+                                        Grid.Column="1"
+                                        MinWidth="10"
+                                        IsReadOnly="{TemplateBinding IsReadOnly}"
+                                        HorizontalAlignment="Stretch"
+                                        HorizontalContentAlignment="Stretch"
+                                        Style="{StaticResource MaterialDesignComboBoxEditableTextBox}"
+                                        CaretBrush="{TemplateBinding BorderBrush}"
+                                        Visibility="Collapsed" />
+
+                                        <wpf:SmartHint
+                                        x:Name="Hint"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="2"
+                                        HintProxy="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static converters:HintProxyFabricConverter.Instance}}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        FontFamily="{TemplateBinding wpf:HintAssist.FontFamily}"
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                        UseLayoutRounding="{TemplateBinding UseLayoutRounding}"
+                                        UseFloating="{TemplateBinding wpf:HintAssist.IsFloating}"
+                                        FloatingScale="{TemplateBinding wpf:HintAssist.FloatingScale}"
+                                        FloatingOffset="{TemplateBinding wpf:HintAssist.FloatingOffset}"
+                                        HintOpacity="{TemplateBinding wpf:HintAssist.HintOpacity}"
+                                        Margin="{TemplateBinding wpf:TextFieldAssist.TextBoxViewMargin}">
+                                            <wpf:SmartHint.Hint>
+                                                <Border
+                                                x:Name="HintBackgroundBorder"
+                                                Background="{TemplateBinding wpf:HintAssist.Background}"
+                                                CornerRadius="2">
+                                                    <ContentPresenter
+                                                    x:Name="HintWrapper"
+                                                    Content="{TemplateBinding wpf:HintAssist.Hint}" />
+                                                </Border>
+                                            </wpf:SmartHint.Hint>
+                                        </wpf:SmartHint>
+
+                                        <TextBlock
+                                        x:Name="SuffixTextBlock"
+                                        Grid.Column="3"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        Opacity="{TemplateBinding wpf:HintAssist.HintOpacity}"
+                                        Text="{TemplateBinding wpf:TextFieldAssist.SuffixText}"
+                                        IsHitTestVisible="False"
+                                        Margin="{Binding ActualWidth, ElementName=PART_ClearButton, Converter={StaticResource DoubleToThicknessConverter}, ConverterParameter={x:Static Dock.Right}}" />
+                                    </Grid>
+                                </Border>
                             </Grid>
                         </Border>
-                    </Grid>
-                </Border>
+                    </AdornerDecorator>
+                </ToggleButton>
                 <wpf:Underline
                     x:Name="Underline"
                     IsActive="{Binding ElementName=PART_EditableTextBox, Path=IsKeyboardFocused}"
@@ -587,7 +591,6 @@
                     <wpf:PackIcon Margin="0" Kind="CloseCircle" />
                 </Button>
             </Grid>
-        </AdornerDecorator>
         <ControlTemplate.Triggers>
             <Trigger Property="wpf:TextFieldAssist.HasFilledTextField" Value="True">
                 <Setter TargetName="templateRoot" Property="CornerRadius" Value="{Binding Path=(wpf:TextFieldAssist.TextFieldCornerRadius), RelativeSource={RelativeSource TemplatedParent}}" />
