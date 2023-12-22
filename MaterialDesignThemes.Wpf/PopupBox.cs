@@ -144,6 +144,18 @@ public class PopupBox : ContentControl
         set => SetValue(ToggleContentTemplateProperty, value);
     }
 
+    public static readonly DependencyProperty ToggleContentTemplateSelectorProperty = DependencyProperty.Register(
+        nameof(ToggleContentTemplateSelector), typeof(DataTemplateSelector), typeof(PopupBox), new PropertyMetadata(default(DataTemplateSelector?)));
+
+    /// <summary>
+    /// Template for <see cref="ToggleContent"/>.
+    /// </summary>
+    public DataTemplateSelector? ToggleContentTemplateSelector
+    {
+        get => (DataTemplateSelector?)GetValue(ToggleContentTemplateSelectorProperty);
+        set => SetValue(ToggleContentTemplateSelectorProperty, value);
+    }
+
     public static readonly DependencyProperty ToggleCheckedContentProperty = DependencyProperty.Register(
         nameof(ToggleCheckedContent), typeof(object), typeof(PopupBox), new PropertyMetadata(default(object?)));
 
@@ -278,6 +290,15 @@ public class PopupBox : ContentControl
     {
         get => (PopupBoxPlacementMode)GetValue(PlacementModeProperty);
         set => SetValue(PlacementModeProperty, value);
+    }
+
+    internal static readonly DependencyProperty PlacementTargetProperty = DependencyProperty.Register(
+        nameof(PlacementTarget), typeof(UIElement), typeof(PopupBox), new PropertyMetadata(default(UIElement)));
+
+    internal UIElement? PlacementTarget
+    {
+        get => (UIElement?)GetValue(PlacementTargetProperty);
+        set => SetValue(PlacementTargetProperty, value);
     }
 
     public static readonly DependencyProperty PopupModeProperty = DependencyProperty.Register(
